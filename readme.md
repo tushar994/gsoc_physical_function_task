@@ -20,7 +20,7 @@
     -x/1! + x^3/3! - x^5/5!
     ```
 
-## Descrption of the class functions
+## Description of the class functions
 
 ### CosFunc
 
