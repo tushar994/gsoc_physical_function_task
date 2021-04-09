@@ -70,15 +70,11 @@ def co_exp_three(x):
 @tf.function(autograph=False)
 def cos_exp(x):
     """Return the elementwise value of the function 'sum_cos_sin(x) for x < - 1; exp(x) for -1 < x < 3; cos(x) for x > 3."""
-    # return tf.cond(tf.math.greater(x, tf.constant(3.,dtype=tf.float64)), lambda : tf.math.cos(x), lambda : tf.cond(tf.math.less(x,tf.constant(-1., dtype=tf.float64)), lambda : tf.math.sin(x) + tf.math.cos(x),lambda : tf.math.exp(x)))
-    # print(x)
-    # return x.get_shape().as_list()
     if x.get_shape().as_list()!=[]:
         return tf.map_fn(co_exp_three, x)
     else:
         return tf.cond(tf.math.greater(x, tf.constant(3.,dtype=tf.float64)), lambda : tf.math.cos(x), lambda : tf.cond(tf.math.less(x,tf.constant(-1., dtype=tf.float64)), lambda : tf.math.sin(x) + tf.math.cos(x),lambda : tf.math.exp(x))) 
 
-    # return tf.where(True, tf.cond(tf.math.greater(x, tf.constant(3.,dtype=tf.float64)), lambda : tf.math.cos(x), lambda : tf.cond(tf.math.less(x,tf.constant(-1., dtype=tf.float64)), lambda : tf.math.sin(x) + tf.math.cos(x),lambda : tf.math.exp(x))), 0)
 
 
 # use @tf.custom_gradient to add a custom gradient using again a series approximation
